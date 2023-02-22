@@ -22,7 +22,7 @@
 
 #### <u>*Example 2*</u>
 
-<img title="" src="file:///home/nassih/Desktop/algorithms/java/dijkstra/images/algo_example_2.png" alt="" data-align="center" width="558">
+<img title="" src="./images/algo_example_2.png" alt="" data-align="center" width="558">
 
 *Output*
 
