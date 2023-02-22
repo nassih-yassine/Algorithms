@@ -65,6 +65,7 @@ public class UndirectedGraph {
 
                 if (!testingLoop.contains(false) && !consumedVortexes.contains(bigVortexValue)){
                     consumedVortexes.add(bigVortexValue);
+                    continue;
                 }
 
                 if(vortexCost.get(smallVortexValue)+ ue.getWeight() < vortexCost.get(bigVortexValue)){

@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         // Undirected Algorithm
 
-        //EXAMPLE
+        //EXAMPLE 1
         //  VORTEXES
         Vortex a = new Vortex("A");
         Vortex b = new Vortex("B");
@@ -50,6 +50,45 @@ public class Main {
                 edges2
         );
 
-        undirectedGraph2.dijkstra(a);
+        //undirectedGraph2.dijkstra(a);
+
+        //EXAMPLE 2
+        //  VORTEX
+        Vortex A = new Vortex("A");
+        Vortex B = new Vortex("B");
+        Vortex C = new Vortex("C");
+        Vortex P = new Vortex("P");
+        Vortex E = new Vortex("E");
+        Vortex V = new Vortex("V");
+        Vortex L = new Vortex("L");
+        Vortex G = new Vortex("G");
+
+        Collection<Vortex> vortexes3 = Arrays.asList(
+                A, B, C, P, E, V, L, G
+        );
+
+        //  EDGES
+        UndirectedEdge AC = new UndirectedEdge(A, C, 160);
+        UndirectedEdge AP = new UndirectedEdge(A, P, 180);
+        UndirectedEdge CP = new UndirectedEdge(C, P, 130);
+        UndirectedEdge CE = new UndirectedEdge(C, E, 140);
+        UndirectedEdge CL = new UndirectedEdge(C, L, 180);
+        UndirectedEdge PE = new UndirectedEdge(P, E, 80);
+        UndirectedEdge PV = new UndirectedEdge(P, V, 100);
+        UndirectedEdge EL = new UndirectedEdge(E, L, 70);
+        UndirectedEdge EV = new UndirectedEdge(E, V, 100);
+        UndirectedEdge LB = new UndirectedEdge(L, B, 80);
+        UndirectedEdge LG = new UndirectedEdge(L, G, 110);
+        UndirectedEdge LV = new UndirectedEdge(L, V, 100);
+        UndirectedEdge VG= new UndirectedEdge(V, G, 90);
+        UndirectedEdge BG= new UndirectedEdge(B, G, 180);
+
+        Collection<UndirectedEdge> undirectedEdges3 = Arrays.asList(
+                AC, AP, CP, CE, CL, PE, PV, EL, EV, LB, LG, LV, VG, BG
+        );
+
+        //  Graph
+        UndirectedGraph graph2 = new UndirectedGraph(vortexes3, undirectedEdges3);
+        graph2.dijkstra(B);
     }
 }
