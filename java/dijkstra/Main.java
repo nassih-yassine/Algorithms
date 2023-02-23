@@ -9,18 +9,18 @@ public class Main {
         // Undirected Algorithm
 
         //EXAMPLE 1
-        //  VORTEXES
-        Vortex a = new Vortex("A");
-        Vortex b = new Vortex("B");
-        Vortex c = new Vortex("C");
-        Vortex d = new Vortex("D");
-        Vortex e = new Vortex("E");
-        Vortex f = new Vortex("F");
-        Vortex g = new Vortex("G");
-        Vortex h = new Vortex("H");
-        Vortex i = new Vortex("I");
+        //  VERTICES
+        Vertex a = new Vertex("A");
+        Vertex b = new Vertex("B");
+        Vertex c = new Vertex("C");
+        Vertex d = new Vertex("D");
+        Vertex e = new Vertex("E");
+        Vertex f = new Vertex("F");
+        Vertex g = new Vertex("G");
+        Vertex h = new Vertex("H");
+        Vertex i = new Vertex("I");
 
-        Collection<Vortex> vortexes2 = Arrays.asList(
+        Collection<Vertex> vertices2 = Arrays.asList(
                 a, b, c, d, e, f, g, h, i
         );
 
@@ -46,24 +46,24 @@ public class Main {
 
         //  Graph
         UndirectedGraph undirectedGraph2 = new UndirectedGraph(
-                vortexes2,
+                vertices2,
                 edges2
         );
 
         //undirectedGraph2.dijkstra(a);
 
         //EXAMPLE 2
-        //  VORTEX
-        Vortex A = new Vortex("A");
-        Vortex B = new Vortex("B");
-        Vortex C = new Vortex("C");
-        Vortex P = new Vortex("P");
-        Vortex E = new Vortex("E");
-        Vortex V = new Vortex("V");
-        Vortex L = new Vortex("L");
-        Vortex G = new Vortex("G");
+        //  VERTICES
+        Vertex A = new Vertex("A");
+        Vertex B = new Vertex("B");
+        Vertex C = new Vertex("C");
+        Vertex P = new Vertex("P");
+        Vertex E = new Vertex("E");
+        Vertex V = new Vertex("V");
+        Vertex L = new Vertex("L");
+        Vertex G = new Vertex("G");
 
-        Collection<Vortex> vortexes3 = Arrays.asList(
+        Collection<Vertex> vertices3 = Arrays.asList(
                 A, B, C, P, E, V, L, G
         );
 
@@ -88,7 +88,10 @@ public class Main {
         );
 
         //  Graph
-        UndirectedGraph graph2 = new UndirectedGraph(vortexes3, undirectedEdges3);
+        UndirectedGraph graph2 = new UndirectedGraph(
+                vertices3,
+                undirectedEdges3
+        );
         graph2.dijkstra(B);
     }
 }

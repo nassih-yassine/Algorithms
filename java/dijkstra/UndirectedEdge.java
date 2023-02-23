@@ -3,29 +3,29 @@ package dijkstra;
 import java.util.Collection;
 
 public class UndirectedEdge {
-    private final Vortex v1;
-    private final Vortex v2;
+    private final Vertex v1;
+    private final Vertex v2;
     private final Integer weight;
 
-    public UndirectedEdge(Vortex v1, Vortex v2, Integer weight) {
+    public UndirectedEdge(Vertex v1, Vertex v2, Integer weight) {
         this.v1 = v1;
         this.v2 = v2;
         this.weight = weight;
     }
 
-    public Vortex getV1() {
+    public Vertex getV1() {
         return v1;
     }
 
-    public Vortex getV2() {
+    public Vertex getV2() {
         return v2;
     }
 
-    public boolean vortexExist(Vortex v){
+    public boolean vertexExist(Vertex v){
         return this.v1.equals(v) || this.v2.equals(v);
     }
 
-    public Vortex getOtherVortexInEdge(Vortex v){
+    public Vertex getOtherVertexInEdge(Vertex v){
         return v1.equals(v) ? v2 : v1;
     }
 
@@ -38,11 +38,11 @@ public class UndirectedEdge {
         return v1.name() + "---("+weight+")--->" + v2.name();
     }
 
-    public boolean onlyOneVortexInCollection(Collection<Vortex> vortexes){
-        return (vortexes.contains(v1) && !vortexes.contains(v2)) || (!vortexes.contains(v1) && vortexes.contains(v2));
+    public boolean onlyOneVertexInCollection(Collection<Vertex> vertices){
+        return (vertices.contains(v1) && !vertices.contains(v2)) || (!vertices.contains(v1) && vertices.contains(v2));
     }
 
-    public Vortex getExistingVortexInEdge(Collection<UndirectedEdge> vortexes){
+    public Vertex getExistingVertexInEdge(Collection<UndirectedEdge> vortexes){
         return vortexes.contains(v1)? v1 : v2;
     }
 }

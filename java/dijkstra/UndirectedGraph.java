@@ -4,30 +4,30 @@ import java.util.*;
 
 
 public class UndirectedGraph {
-    private final Collection<Vortex> vortexes;
+    private final Collection<Vertex> vertices;
     private final Collection<UndirectedEdge> edges;
 
-    public UndirectedGraph(Collection<Vortex> vortexes, Collection<UndirectedEdge> edges) {
-        this.vortexes = vortexes;
+    public UndirectedGraph(Collection<Vertex> vertices, Collection<UndirectedEdge> edges) {
+        this.vertices = vertices;
         this.edges = edges;
     }
 
-    public void dijkstra(Vortex startingVortex){
-        Map<Vortex, Integer> vortexCost = new HashMap<>();
-        Map<Vortex, String> vortexPath = new HashMap<>();
-        Collection<Vortex> consumedVortexes = new ArrayList<>();
+    public void dijkstra(Vertex startingVertex){
+        Map<Vertex, Integer> vertexCost = new HashMap<>();
+        Map<Vertex, String> vertexPath = new HashMap<>();
+        Collection<Vertex> consumedVertices = new ArrayList<>();
 
-        vortexes.forEach(vortex -> vortexCost.put(vortex, Integer.MAX_VALUE));
-        vortexCost.put(startingVortex, 0);
-        vortexPath.put(startingVortex, startingVortex.name());
-        consumedVortexes.add(startingVortex);
+        vertices.forEach(vertex -> vertexCost.put(vertex, Integer.MAX_VALUE));
+        vertexCost.put(startingVertex, 0);
+        vertexPath.put(startingVertex, startingVertex.name());
+        consumedVertices.add(startingVertex);
 
-        while (vortexes.size() != consumedVortexes.size()){
+        while (vertices.size() != consumedVertices.size()){
             Collection<UndirectedEdge> connectedEdges = new ArrayList<>();
 
-            for (Vortex v : consumedVortexes){
+            for (Vertex v : consumedVertices){
                 for (UndirectedEdge ue : edges){
-                    if (ue.vortexExist(v)){
+                    if (ue.vertexExist(v)){
                         connectedEdges.add(ue);
                     }
                 }
@@ -35,59 +35,59 @@ public class UndirectedGraph {
             connectedEdges = connectedEdges
                     .stream()
                     .filter(
-                    elem -> !(consumedVortexes.contains(elem.getV2()) && consumedVortexes.contains(elem.getV1()))
+                    elem -> !(consumedVertices.contains(elem.getV2()) && consumedVertices.contains(elem.getV1()))
             ).toList();
 
-            Map<Vortex, Integer> connectedEdgesVortexCost = new HashMap<>();
+            Map<Vertex, Integer> connectedEdgesVertexCost = new HashMap<>();
 
             for (UndirectedEdge ue : connectedEdges){
-                Vortex smallVortexValue;
-                Vortex bigVortexValue;
-
-                if (vortexCost.get(ue.getV1()) > vortexCost.get(ue.getV2())){
-                    bigVortexValue = ue.getV1();
-                    smallVortexValue = ue.getV2();
+                Vertex smallVertexValue;
+                Vertex bigVertexValue;
+                
+                if (vertexCost.get(ue.getV1()) > vertexCost.get(ue.getV2())){
+                    bigVertexValue = ue.getV1();
+                    smallVertexValue = ue.getV2();
                 }
                 else{
-                    bigVortexValue = ue.getV2();
-                    smallVortexValue = ue.getV1();
+                    bigVertexValue = ue.getV2();
+                    smallVertexValue = ue.getV1();
                 }
 
-                if (vortexCost.get(smallVortexValue)+ ue.getWeight() > vortexCost.get(bigVortexValue)){
-                    connectedEdgesVortexCost.put(bigVortexValue, vortexCost.get(bigVortexValue));
+                if (vertexCost.get(smallVertexValue)+ ue.getWeight() > vertexCost.get(bigVertexValue)){
+                    connectedEdgesVertexCost.put(bigVertexValue, vertexCost.get(bigVertexValue));
                     continue;
                 }
 
                 Collection<Boolean> testingLoop =  edges.stream()
-                        .filter(e -> e.vortexExist(bigVortexValue))
-                        .map(e -> consumedVortexes.contains(e.getOtherVortexInEdge(bigVortexValue)))
+                        .filter(e -> e.vertexExist(bigVertexValue))
+                        .map(e -> consumedVertices.contains(e.getOtherVertexInEdge(bigVertexValue)))
                         .toList();
 
-                if (!testingLoop.contains(false) && !consumedVortexes.contains(bigVortexValue)){
-                    consumedVortexes.add(bigVortexValue);
+                if (!testingLoop.contains(false) && !consumedVertices.contains(bigVertexValue)){
+                    consumedVertices.add(bigVertexValue);
                     continue;
                 }
 
-                if(vortexCost.get(smallVortexValue)+ ue.getWeight() < vortexCost.get(bigVortexValue)){
-                    vortexCost.put(bigVortexValue, vortexCost.get(smallVortexValue)+ ue.getWeight());
-                    connectedEdgesVortexCost.put(bigVortexValue, vortexCost.get(smallVortexValue)+ ue.getWeight());
-                    vortexPath.put(bigVortexValue, vortexPath.get(smallVortexValue) + " -> " + bigVortexValue.name());
+                if(vertexCost.get(smallVertexValue)+ ue.getWeight() < vertexCost.get(bigVertexValue)){
+                    vertexCost.put(bigVertexValue, vertexCost.get(smallVertexValue)+ ue.getWeight());
+                    connectedEdgesVertexCost.put(bigVertexValue, vertexCost.get(smallVertexValue)+ ue.getWeight());
+                    vertexPath.put(bigVertexValue, vertexPath.get(smallVertexValue) + " -> " + bigVertexValue.name());
                 }
             }
 
-            Vortex minVortex = null;
+            Vertex minVertex = null;
             Integer minValue = Integer.MAX_VALUE;
-            for (Map.Entry<Vortex, Integer> entry : connectedEdgesVortexCost.entrySet()) {
+            for (Map.Entry<Vertex, Integer> entry : connectedEdgesVertexCost.entrySet()) {
                 if (entry.getValue() < minValue && entry.getKey() != null) {
                     minValue = entry.getValue();
-                    minVortex = entry.getKey();
+                    minVertex = entry.getKey();
                 }
             }
-            consumedVortexes.add(minVortex);
+            consumedVertices.add(minVertex);
         }
 
-        for (Vortex v : vortexCost.keySet()){
-            System.out.println(v.name() + "\tPath: '"+ vortexPath.get(v) + "'\tCost: " + vortexCost.get(v));
+        for (Vertex v : vertexCost.keySet()){
+            System.out.println(v.name() + "\tPath: '"+ vertexPath.get(v) + "'\tCost: " + vertexCost.get(v));
         }
     }
 }
